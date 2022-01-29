@@ -2,6 +2,8 @@ import streamlit as st
 from PIL import Image, ImageOps
 import numpy as np
 import requests
+#como no uso API tambien traigo Keras
+import tensorflow
 
 st.title("Image Classification KOA")
 st.header("Knee OsteoArthritis Classification")
@@ -14,11 +16,23 @@ if uploaded_file is not None:
     st.write("")
     st.write("Classifying...")
 
+    #traigo lo que tenia en la API porque somos vagos y no queremos desarrollar
+    # Prepro
+    imagen = image.convert('RGB')
+    imagen_np = (np.array(imagen)) / 255
+    imagen_exp = np.expand_dims(imagen_np, 0)
+    #model = tf.keras.models.load_model(path_model, compile=False)
+    model = tensorflow.keras.models.load_model('modelo_franco_MobileNet121.h5',
+                                               compile=False)
+    prediccion = model.predict(imagen_exp)
+    aaaa = f"{np.argmax(prediccion, axis=1)}"
+    label = aaaa[1]
+    #return {"prediction": aaaa[1]}
+
     #CALL OUR API
-    KOA_api_url = f"http://127.0.0.1:8000/predict?image_to_predict={image}"
-    response = requests.get(KOA_api_url).json()
-    label = response['prediction']
-    st.write(label)
+    #KOA_api_url = f"http://127.0.0.1:8000/predict?image_to_predict={image}"
+    #response = requests.get(KOA_api_url).json()
+    #label = response['prediction']
 
     if label == '0':
         st.write("The KNEE is Healthy")
