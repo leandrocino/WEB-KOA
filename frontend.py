@@ -7,7 +7,7 @@ import tensorflow
 
 st.title("Image Classification KOA")
 st.header("Knee OsteoArthritis Classification")
-st.text("(c)2022 by the KOA team")
+st.text("(c)2022 by the KOA team (Fede, Franco, Roberto, Leandro")
 st.text("Upload a KNEE .png/.jpg/.jpeg Image for image classification as 0-4")
 
 uploaded_file = st.file_uploader("Choose a KNEE image...", type=["png","jpg","jpeg"])
