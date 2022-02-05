@@ -2,7 +2,7 @@ streamlit
 Pillow
 numpy
 requests
-
+IPython
 
 ## como voy a correr todo local sin usar APIs tambien traigo
 tensorflow-cpu
