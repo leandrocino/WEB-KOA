@@ -83,8 +83,19 @@ def save_and_display_gradcam(img_path, heatmap, cam_path="cam.jpg", alpha=0.4):
 st.title("RX Knee Classification - Project: KOA")
 st.header(
     "Knee Osteoarthritis Diagnosis from Plain Radiographs using Deep Learning-Based approach and Attention Maps")
-st.text("(c)2022 by the KOA team - Batch #705 (Fede, Franco, Roberto, Leandro)")
-#st.text("Upload a Knee RX Image for its classification")
+st.write("(c)2022 by the KOA team - Batch #705 (Fede, Franco, Roberto, Leandro)")
+st.write("")
+st.write(
+    "Knee osteoarthritis is defined by degeneration of the knee’s articular cartilage the flexible, \
+    slippery material that normally protects bones from joint friction and impact. The condition \
+    also involves changes to the bone underneath the cartilage and can affect nearby soft tissues. \
+    Knee osteoarthritis is by far the most common type of arthritis to cause knee pain and often referred \
+    to as simply knee arthritis. Many other less common types of arthritis can also cause knee pain,\
+    including rheumatoid arthritis, pseudogout, and reactive arthritis.")
+st.write(" ")
+st.write("Acknowledgements")
+st.write("Chen, Pingjun (2018), “Knee Osteoarthritis Severity Grading Dataset”, Mendeley Data, V1, doi: 10.17632/56rmx5bjcr.1")
+st.write("The dataset is organized from OAI.")
 
 uploaded_file = st.file_uploader("Please upload a RX knee image.", type=["png","jpg","jpeg"])
 if uploaded_file is not None:
@@ -96,7 +107,6 @@ if uploaded_file is not None:
     for percent_complete in range(100):
         time.sleep(0.1)
         my_bar.progress(percent_complete + 1)
-
 
     #traigo lo que tenia en la API porque somos vagos y no queremos desarrollar
     # Prepro
@@ -117,15 +127,23 @@ if uploaded_file is not None:
     #label = response['prediction']
 
     if label == '0':
-        st.title("The knee is Healthy")
+        st.title("Using our AI algorithm we are predicting that the RX knee is associated with a healthy subject")
     elif label == '1':
-        st.title("The knee is Grade 1 (Doubtful)")
+        st.title(
+            "Using our AI algorithm we are predicting that the RX knee has a Grade 1 (Doubtful)"
+        )
     elif label == '2':
-        st.title("The knee is Grade 2 (Minimal)")
+        st.title(
+            "Using our AI algorithm we are predicting that the RX knee has a Grade 2 (Minimal)"
+        )
     elif label == '3':
-        st.title("The knee is Grade 3 (Moderate)")
+        st.title(
+            "Using our AI algorithm we are predicting that the RX knee has a Grade 3 (Moderate)"
+        )
     else:
-        st.title("The knee is Grade 4 (Severe)")
+        st.title(
+            "Using our AI algorithm we are predicting that the RX knee has a Grade 4 (Severe)"
+        )
 
     #'''The Grad-CAM algorithm'''
 

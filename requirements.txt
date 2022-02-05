@@ -3,6 +3,7 @@ Pillow
 numpy
 requests
 IPython
+matplotlib
 
 ## como voy a correr todo local sin usar APIs tambien traigo
 tensorflow-cpu
