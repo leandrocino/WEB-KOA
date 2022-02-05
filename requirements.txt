@@ -1,7 +1,6 @@
 streamlit
 Pillow
 numpy
-requests
 IPython
 matplotlib
 
