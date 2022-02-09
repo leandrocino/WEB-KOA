@@ -81,7 +81,7 @@ def save_and_display_gradcam(img_path, heatmap, cam_path="cam.jpg", alpha=0.4):
 
 
 st.title("RX Knee Classification Project")
-img_header = pimage.open('/home/roberto/code/leandrocino/WEB-KOA/Header Osteo AI.png')
+img_header = pimage.open('Header Osteo AI.png')
 st.image(img_header)
 st.header(
     "Knee Osteoarthritis Diagnosis from Plain Radiographs using Deep Learning-Based approach and Attention Maps")
