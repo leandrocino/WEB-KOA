@@ -80,24 +80,26 @@ def save_and_display_gradcam(img_path, heatmap, cam_path="cam.jpg", alpha=0.4):
     #display(Image(cam_path))
 
 
-st.title("RX Knee Classification - Project: KOA")
+st.title("RX Knee Classification Project")
+img_header = pimage.open('/home/roberto/code/leandrocino/WEB-KOA/Header Osteo AI.png')
+st.image(img_header)
 st.header(
     "Knee Osteoarthritis Diagnosis from Plain Radiographs using Deep Learning-Based approach and Attention Maps")
-st.write("(c)2022 by the KOA team - Batch #705 (Fede, Franco, Roberto, Leandro)")
+st.write("(c) 2022 by Federico I., Franco S., Roberto C., Leandro C.")
 st.write("")
-st.write(
-    "Knee osteoarthritis is defined by degeneration of the knee’s articular cartilage the flexible, \
-    slippery material that normally protects bones from joint friction and impact. The condition \
-    also involves changes to the bone underneath the cartilage and can affect nearby soft tissues. \
-    Knee osteoarthritis is by far the most common type of arthritis to cause knee pain and often referred \
-    to as simply knee arthritis. Many other less common types of arthritis can also cause knee pain,\
-    including rheumatoid arthritis, pseudogout, and reactive arthritis.")
+st.subheader("Knee osteoarthritis is defined by degeneration of the knee’s articular cartilage the flexible, slippery material that normally protects bones from joint friction and impact.")
+st.subheader("The condition also involves changes to the bone underneath the cartilage and can affect nearby soft tissues.")
+st.subheader("Knee osteoarthritis is by far the most common type of arthritis to cause knee pain and often referred to as simply knee arthritis.")
+st.subheader("Many other less common types of arthritis can also cause knee pain, including rheumatoid arthritis, pseudogout, and reactive arthritis.")
 st.write(" ")
-st.write("Acknowledgements")
+st.write("*Disclaimer*: This model is just an educational project that still does not have the necessary validation to be used as a medical diagnosis tool.")
+st.write("**Acknowledgements**")
 st.write("Chen, Pingjun (2018), “Knee Osteoarthritis Severity Grading Dataset”, Mendeley Data, V1, doi: 10.17632/56rmx5bjcr.1")
-st.write("The dataset is organized from OAI.")
+st.write("The dataset is organized from [OAI](https://oai.epi-ucsf.org/datarelease/)")
+st.write("Source of Database is available [here](https://data.mendeley.com/datasets/56rmx5bjcr/1)")
 
-uploaded_file = st.file_uploader("Please upload a RX knee image.", type=["png","jpg","jpeg"])
+st.header('Please upload a RX knee image')
+uploaded_file = st.file_uploader("", type=["png","jpg","jpeg"])
 if uploaded_file is not None:
     image = pimage.open(uploaded_file)
     st.image(image, caption='Uploaded RX knee.', use_column_width=False)
@@ -127,25 +129,27 @@ if uploaded_file is not None:
     #label = response['prediction']
 
     if label == '0':
-        st.title("Using our AI algorithm we are predicting that the RX knee is associated with a healthy subject")
+        st.title("Result: The AI algorithm shows that the RX has a Grade 0 Osteoarthritis (No osteoarthritis) (Kellgren and Lawrence scale)")
     elif label == '1':
         st.title(
-            "Using our AI algorithm we are predicting that the RX knee has a Grade 1 (Doubtful)"
+            "Result: The AI algorithm shows that the RX has a Grade 1 Osteoarthritis (Mild) (Kellgren and Lawrence scale)"
         )
     elif label == '2':
         st.title(
-            "Using our AI algorithm we are predicting that the RX knee has a Grade 2 (Minimal)"
+            "Result: The AI algorithm shows that the RX has a Grade 2 Osteoarthritis (Minimal) (Kellgren and Lawrence scale)"
         )
     elif label == '3':
         st.title(
-            "Using our AI algorithm we are predicting that the RX knee has a Grade 3 (Moderate)"
+            "Result: The AI algorithm shows that the RX has a Grade 3 Osteoarthritis (Moderate) (Kellgren and Lawrence scale)"
         )
     else:
         st.title(
-            "Using our AI algorithm we are predicting that the RX knee has a Grade 4 (Severe)"
+            "Result: The AI algorithm shows that the RX has a Grade 4 Osteoarthritis (Severe) (Kellgren and Lawrence scale)"
         )
 
     #'''The Grad-CAM algorithm'''
+
+    st.write("*Disclaimer*: This model is just an educational project that still does not have the necessary validation to be used as a medical diagnosis tool.")
 
     agree = st.checkbox('Check to see the GradCam')
 
@@ -164,12 +168,12 @@ if uploaded_file is not None:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.header("GradCam")
-            st.image(save_and_display_gradcam(imagen, heatmap), use_column_width=False, caption='GradCam visualization')
+            st.header("GradCam view")
+            st.image(save_and_display_gradcam(imagen, heatmap), use_column_width=False, caption='Class activation heatmap')
 
         with col2:
-            st.header("Grayscale")
+            st.header("Standard RX view")
             st.image(imagen, caption = 'Original Image')
 
-        time.sleep(10)
-        st.balloons()
+        # time.sleep(10)
+        # st.balloons()
